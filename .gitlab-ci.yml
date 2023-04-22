@@ -50,6 +50,8 @@ perf-test:
     - echo "Starting service in the background"
     - docker-compose up --build --no-deps -d service
     - docker-compose ps
+    - echo "Give extra time for JVM startup"
+    - sleep 20
     - echo "Starting perf-tester execution"
     - docker-compose up --no-deps perf-tester
   when: manual
