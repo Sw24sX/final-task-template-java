@@ -1,18 +1,27 @@
 package ru.tinkoff.contest.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.tinkoff.contest.service.dto.request.AccountTurnoverRequest;
 import ru.tinkoff.contest.service.dto.response.AccountTurnoverResponse;
+import ru.tinkoff.contest.service.exception.NotValidException;
+import ru.tinkoff.contest.service.service.AccountTurnoverServiceApi;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/account-turnover")
 @RequiredArgsConstructor
+@Validated
 public class AccountTurnoverController {
+
+    private final AccountTurnoverServiceApi accountTurnoverServiceApi;
 
     @GetMapping("/{accountNumber}")
     public AccountTurnoverResponse accountTurnover(@PathVariable Integer accountNumber,
-                                                   @RequestBody AccountTurnoverRequest accountTurnoverRequest) {
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
 
 //        Проверить в запросе:
 //
@@ -35,6 +44,11 @@ public class AccountTurnoverController {
 //        Если счета не существует, то вернуть HTTP 400.
 //        В случае ошибок во время работы метода, вернуть HTTP 500.
 
-        return null;
+
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new NotValidException("Start date before end date");
+        }
+
+        return accountTurnoverServiceApi.accountTurnover(accountNumber, startDate, endDate);
     }
 }

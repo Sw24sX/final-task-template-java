@@ -3,7 +3,7 @@ package ru.tinkoff.contest.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.tinkoff.contest.service.AccountServiceApi;
+import ru.tinkoff.contest.service.service.AccountServiceApi;
 import ru.tinkoff.contest.service.dto.request.AccountCreateRequest;
 import ru.tinkoff.contest.service.dto.request.TopUpAccountRequest;
 import ru.tinkoff.contest.service.dto.response.AccountCreateResponse;

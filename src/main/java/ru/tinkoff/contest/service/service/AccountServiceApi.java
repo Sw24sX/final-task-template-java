@@ -1,4 +1,4 @@
-package ru.tinkoff.contest.service;
+package ru.tinkoff.contest.service.service;
 
 import ru.tinkoff.contest.service.dto.request.AccountCreateRequest;
 import ru.tinkoff.contest.service.dto.request.TopUpAccountRequest;

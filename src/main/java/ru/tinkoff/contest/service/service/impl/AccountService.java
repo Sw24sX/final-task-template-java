@@ -1,11 +1,11 @@
-package ru.tinkoff.contest.service.impl;
+package ru.tinkoff.contest.service.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.tinkoff.contest.domain.repository.AccountRepository;
 import ru.tinkoff.contest.domain.repository.TransactionRepository;
-import ru.tinkoff.contest.service.AccountServiceApi;
+import ru.tinkoff.contest.service.service.AccountServiceApi;
 import ru.tinkoff.contest.service.dto.request.AccountCreateRequest;
 import ru.tinkoff.contest.service.dto.request.TopUpAccountRequest;
 import ru.tinkoff.contest.service.dto.response.AccountCreateResponse;
