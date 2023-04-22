@@ -1,6 +1,7 @@
 package ru.tinkoff.contest.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.contest.service.AccountServiceApi;
 import ru.tinkoff.contest.service.dto.request.AccountCreateRequest;
@@ -8,27 +9,18 @@ import ru.tinkoff.contest.service.dto.request.TopUpAccountRequest;
 import ru.tinkoff.contest.service.dto.response.AccountCreateResponse;
 import ru.tinkoff.contest.service.dto.response.GetAccountResponse;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
+@Validated
 public class AccountController {
 
     private final AccountServiceApi accountServiceApi;
 
     @PostMapping
-    public AccountCreateResponse createAccount(@RequestBody AccountCreateRequest accountCreateRequest) {
-
-//        Проверить наличие обязательных параметров в запросе и формат значений.
-//                Проверить, что birthDay < текущей даты. Если нет - вернуть ошибку.
-//                Проверить возраст клиента, сравнив год между birthDay и текущей датой. Если полученный возраст
-//        ВНЕ диапазона от 14 до 120, то вернуть ошибку.
-//        Если currency из запроса != RUB, USD, GBP и EUR, то вернуть ошибку.
-//        Сохранить в базу данных.
-//        При успехе, вернуть в ответе HTTP 200 OK и созданный accountNumber.
-//
-//
-//        В случае невалидного запроса вернуть HTTP 400
-//        В случае ошибок во время работы метода, вернуть HTTP 500.
+    public AccountCreateResponse createAccount(@Valid @RequestBody AccountCreateRequest accountCreateRequest) {
 
         return accountServiceApi.create(accountCreateRequest);
     }
@@ -54,7 +46,7 @@ public class AccountController {
     }
 
     @PostMapping("/{accountNumber}/top-up")
-    public void topUpAccount(@PathVariable Integer accountNumber, @RequestBody TopUpAccountRequest topUpAccountRequest) {
+    public void topUpAccount(@PathVariable Integer accountNumber, @Valid @RequestBody TopUpAccountRequest topUpAccountRequest) {
 
 //        Проверить наличие обязательных параметров в запросе и формат значений.
 //                Найти в таблице account запись с accountNumber из запроса. Если не найдена - вернуть ошибку.

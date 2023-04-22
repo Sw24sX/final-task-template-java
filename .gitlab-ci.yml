@@ -29,6 +29,8 @@ test:
     - docker-compose ps
     - echo "Starting checker execution"
     - docker-compose up --no-deps checker
+    - echo "Give extra time for JVM startup"
+    - sleep 20
     - echo "Checking application logs"
     - docker-compose logs service
   interruptible: true
