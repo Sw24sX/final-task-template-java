@@ -18,10 +18,6 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn
-    private Account source;
-
-    @ManyToOne
-    @JoinColumn
     private Account target;
 
     @Column(nullable = false)

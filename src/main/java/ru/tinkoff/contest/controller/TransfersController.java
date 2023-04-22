@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tinkoff.contest.service.dto.request.TransferRequest;
+import ru.tinkoff.contest.service.service.TransferServiceApi;
 
 @RestController
 @RequestMapping("/api/v1/transfers")
 @RequiredArgsConstructor
 public class TransfersController {
+
+    private final TransferServiceApi transferServiceApi;
 
     @PostMapping
     public void transfer(@RequestBody TransferRequest transferRequest) {
@@ -43,5 +46,7 @@ public class TransfersController {
 //                В случае невалидного запроса вернуть HTTP 400.
 //        Если какого-либо счета не существует, то вернуть HTTP 400.
 //        В случае ошибок во время работы метода, вернуть HTTP 500.
+
+        transferServiceApi.transfer(transferRequest);
     }
 }
