@@ -21,7 +21,8 @@ public class AccountService implements AccountServiceApi {
     @Override
     @Transactional
     public AccountCreateResponse create(AccountCreateRequest request) {
-        var result = accountRepository.save(AccountFactory.from(request));
+        var account = AccountFactory.from(request);
+        var result = accountRepository.save(account);
         return AccountFactory.toCreateResponse(result);
     }
 
@@ -29,11 +30,15 @@ public class AccountService implements AccountServiceApi {
     public GetAccountResponse getByNumber(Integer number) {
         var result = accountRepository.findById(number)
                 .orElseThrow(() -> new EntityNotFound("Account by number %s not found", number));
-        return AccountFactory.;
+        return AccountFactory.toGetAccountResponse(result);
     }
 
     @Override
+    @Transactional
     public void topUpAccount(Integer accountNumber, TopUpAccountRequest topUpAccountRequest) {
-
+        var accountLocked = accountRepository.findByIdPessimisticLock(accountNumber)
+                .orElseThrow(() -> new EntityNotFound("Account by number %s not found", accountNumber));
+        accountLocked.setAmount(accountLocked.getAmount() + topUpAccountRequest.getAmount());
+        accountRepository.save(accountLocked);
     }
 }

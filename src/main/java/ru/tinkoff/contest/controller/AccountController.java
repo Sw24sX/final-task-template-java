@@ -2,6 +2,7 @@ package ru.tinkoff.contest.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.tinkoff.contest.service.AccountServiceApi;
 import ru.tinkoff.contest.service.dto.request.AccountCreateRequest;
 import ru.tinkoff.contest.service.dto.request.TopUpAccountRequest;
 import ru.tinkoff.contest.service.dto.response.AccountCreateResponse;
@@ -11,6 +12,8 @@ import ru.tinkoff.contest.service.dto.response.GetAccountResponse;
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
 public class AccountController {
+
+    private final AccountServiceApi accountServiceApi;
 
     @PostMapping
     public AccountCreateResponse createAccount(@RequestBody AccountCreateRequest accountCreateRequest) {
@@ -27,7 +30,7 @@ public class AccountController {
 //        В случае невалидного запроса вернуть HTTP 400
 //        В случае ошибок во время работы метода, вернуть HTTP 500.
 
-        return null;
+        return accountServiceApi.create(accountCreateRequest);
     }
 
     @GetMapping("/{accountNumber}")
@@ -47,7 +50,7 @@ public class AccountController {
 //        Если счета не существует, то вернуть HTTP 400.
 //        В случае ошибок во время работы метода, вернуть HTTP 500.
 
-        return null;
+        return accountServiceApi.getByNumber(accountNumber);
     }
 
     @PostMapping("/{accountNumber}/top-up")
@@ -63,5 +66,7 @@ public class AccountController {
 //                В случае невалидного запроса, вернуть HTTP 400.
 //        Если счета не существует, то вернуть HTTP 400.
 //        В случае ошибок во время работы метода, вернуть HTTP 500.
+
+        accountServiceApi.topUpAccount(accountNumber, topUpAccountRequest);
     }
 }

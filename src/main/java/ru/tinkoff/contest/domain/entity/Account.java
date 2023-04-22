@@ -16,6 +16,10 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
+    @Version
+    @Column(nullable = false)
+    private long version;
+
     @Column(nullable = false)
     private String firstName;
 
@@ -30,4 +34,7 @@ public class Account {
 
     @Column(nullable = false)
     private String currency;
+
+    @Column(nullable = false)
+    private Double amount;
 }

@@ -12,8 +12,9 @@ public class AccountFactory {
         account.setCurrency(accountCreateRequest.getCurrency());
         account.setCountry(accountCreateRequest.getCountry());
         account.setBirthDay(accountCreateRequest.getBirthDay());
-        account.setLastName(account.getLastName());
-        account.setFirstName(account.getFirstName());
+        account.setLastName(accountCreateRequest.getLastName());
+        account.setFirstName(accountCreateRequest.getFirstName());
+        account.setAmount(0.0);
         return account;
     }
 
@@ -22,6 +23,6 @@ public class AccountFactory {
     }
 
     public static GetAccountResponse toGetAccountResponse(Account account) {
-
+        return new GetAccountResponse(account.getAmount(), account.getCurrency());
     }
 }

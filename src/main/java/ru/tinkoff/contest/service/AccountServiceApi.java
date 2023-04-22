@@ -12,6 +12,4 @@ public interface AccountServiceApi {
     GetAccountResponse getByNumber(Integer number);
 
     void topUpAccount(Integer accountNumber, TopUpAccountRequest topUpAccountRequest);
-
-
 }
