@@ -2,8 +2,8 @@ package ru.tinkoff.contest.service.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.tinkoff.contest.service.enums.Currency;
 import ru.tinkoff.contest.service.validation.BirthDay;
-import ru.tinkoff.contest.service.validation.Currency;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,6 +30,5 @@ public class AccountCreateRequest {
     private LocalDate birthDay;
 
     @NotNull
-    @Currency
-    private String currency;
+    private Currency currency;
 }

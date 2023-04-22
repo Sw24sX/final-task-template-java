@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.tinkoff.contest.service.enums.Currency;
 
 @Getter
 @Setter
@@ -13,5 +14,5 @@ public class AccountTurnoverResponse {
 
     private Double amount;
 
-    private String currency;
+    private Currency currency;
 }

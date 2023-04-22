@@ -2,6 +2,7 @@ package ru.tinkoff.contest.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.tinkoff.contest.service.enums.Currency;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -33,7 +34,8 @@ public class Account {
     private LocalDate birthDay;
 
     @Column(nullable = false)
-    private String currency;
+    @Enumerated
+    private Currency currency;
 
     @Column(nullable = false)
     private Double amount;
